@@ -12,9 +12,11 @@
 		$controller = $routes_config[$requested_url];
 
 		if(file_exists($controller))
-		{
+		{	
 			$logger -> log("file found : ${controller}");
+			require 'view/top.php';
 			require $controller;
+			require 'view/bot.php';
 		}
 		else
 		{
