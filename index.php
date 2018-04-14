@@ -1,5 +1,8 @@
 <?php
-	$requested_url = $_SERVER['REQUEST_URI'];
+	$requested_url = $_SERVER['PATH_INFO'];
+	if(!$requested_url){
+	    $requested_url = "/";
+    }
 
 	require 'config/routes.php';
 	require 'tools/logger.php';
