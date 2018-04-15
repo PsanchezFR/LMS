@@ -1,4 +1,5 @@
 <?php
+    session_start();
 	$requested_url = $_SERVER['PATH_INFO'];
 	if(!$requested_url){
 	    $requested_url = "/";
@@ -32,4 +33,7 @@
 		$logger -> log(" [404] route not found : ${requested_url}");
 		require 'controller/errors/404.php';
 	}
+    $_POST = array();
+    session_unset();
+	$_SESSION = array();
 ?>
