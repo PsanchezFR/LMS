@@ -2,11 +2,11 @@
     <form id="formLogin" method="post" class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-4 h-75 d-block d-sm-flex flex-column align-items-center">
         <i style="color: #005cbf" class="MaxSizedIconMd fas fa-lock fa-6x my-auto d-none d-lg-block"></i>
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input p-2" type="text" name="email" id="email">
+            <input class="mdl-textfield__input p-2" type="text" name="email" id="email" required>
             <label class="mdl-textfield__label" for="email">email</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input p-2" type="text" name="password" id="password">
+            <input class="mdl-textfield__input p-2" type="text" name="password" id="password" required>
             <label class="mdl-textfield__label" for="password">Password</label>
         </div>
         <label id="remember" class="mdl-switch mdl-js-switch mdl-js-ripple-effect d-flex m-auto w-25 justify-content-center" for="switch-1">
@@ -27,11 +27,11 @@
 
                 try{
                     //Check the email and password submitted in the DB
-                    $requette = $bdd->prepare('SELECT id, email, password FROM user WHERE email=:email AND password=:password');
-                    $requette->bindParam('email', $_POST['email'], PDO::PARAM_STR);
-                    $requette->bindParam('password', hash('sha256', $_POST['password']), PDO::PARAM_STR);
-                    $result = $requette->execute();
-                    $user = $requette->fetch();
+                    $request = $bdd->prepare('SELECT id, email, password FROM user WHERE email=:email AND password=:password');
+                    $request->bindParam('email', $_POST['email'], PDO::PARAM_STR);
+                    $request->bindParam('password', hash('sha256', $_POST['password']), PDO::PARAM_STR);
+                    $result = $request->execute();
+                    $user = $request->fetch();
 
                     //if there is a matching user redirect to thanking page.
                     if( $user != false ){
@@ -39,9 +39,9 @@
                         $userId = $user['id'];
 
                         //update the last login dateTime
-                        $requette = $bdd->prepare('UPDATE user SET last_login=CURRENT_TIMESTAMP WHERE id=:id');
-                        $requette->bindParam('id', $userId, PDO::PARAM_INT);
-                        $requette->execute();
+                        $request = $bdd->prepare('UPDATE user SET last_login=CURRENT_TIMESTAMP WHERE id=:id');
+                        $request->bindParam('id', $userId, PDO::PARAM_INT);
+                        $request->execute();
 
                         echo "<i style='color: #005cbf' class='fas fa-spinner fa-spin fa-pulse fa-2x my-2'></i>";
                         $_SESSION['user_id'] = $userId;

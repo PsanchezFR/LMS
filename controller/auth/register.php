@@ -6,11 +6,11 @@
 
         <!--INPUTS-->
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input p-2" type="email" name="email" id="email">
+            <input class="mdl-textfield__input p-2" type="email" name="email" id="email" required>
             <label class="mdl-textfield__label" for="email">Email</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input p-2" type="password" name="password" id="password">
+            <input class="mdl-textfield__input p-2" type="password" name="password" id="password" required>
             <label class="mdl-textfield__label" for="password">Password</label>
         </div>
 
@@ -39,6 +39,10 @@
             }
         }
         ?>
+
+        <script>
+
+        </script>
 
     </form>
 </div>
