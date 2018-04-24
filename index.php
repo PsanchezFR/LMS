@@ -7,6 +7,7 @@
 
 	require 'config/routes.php';
 	require 'tools/logger.php';
+	require 'config/pdo.php';
 
 	$logger = new Logger();
 
