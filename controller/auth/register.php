@@ -34,7 +34,7 @@
                 }
                 catch(PDOException $e){
                     $logger->log($e->getMessage());
-                    echo "<i style='color: red' class='fas fa-times fa-2x'></i>";
+                    echo "<i style='color: red' class='fas fa-times fa-2x my-2'></i>";
                 }
             }
         }

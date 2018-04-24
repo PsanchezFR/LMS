@@ -35,7 +35,7 @@
 	}
 	else
 	{	
-		$logger -> log(" [404] route not found : ${requested_url}");
+		$logger -> log("[404] route not found : ${requested_url}");
 		require 'controller/errors/404.php';
 	}
 ?>
