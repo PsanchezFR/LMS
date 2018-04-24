@@ -10,11 +10,13 @@
             <label class="mdl-textfield__label" for="password">Password</label>
         </div>
         <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mt-5">Register</button>
+
         <?php
         if(isset($_POST)){
             if(!empty($_POST['password']) && !empty($_POST['email'])){
-                echo "<i style='color: #005cbf' class='fas fa-spinner fa-spin fa-pulse fa-2x'></i>";
+                //Insert the informations into the DB
                 try{
+                    echo "<i style='color: #005cbf' class='fas fa-spinner fa-spin fa-pulse fa-2x'></i>";
                     $requette = $bdd->prepare('INSERT INTO user (email, password) VALUES (?, ?)');
                     $requette->bindValue(1, $_POST['email']);
                     $requette->bindValue(2, $_POST['password']);
@@ -28,5 +30,6 @@
             }
         }
         ?>
+
     </form>
 </div>

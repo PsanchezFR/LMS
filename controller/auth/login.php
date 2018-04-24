@@ -18,16 +18,25 @@
         </div>
         <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mt-3">Connect !</button>
         <a href="/auth/register" type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary">Register</a>
+
+        <!--PHP LOGIC-->
         <?php
         if(isset($_POST)){
+
             if(!empty($_POST['email']) && !empty($_POST['password'])){
+
                 try{
-                    $requette = $bdd->prepare('SELECT email, password FROM user WHERE email=? AND password=?');
+                    //Check the email and password submitted in the DB
+                    $requette = $bdd->prepare('SELECT id, email, password FROM user WHERE email=? AND password=?');
                     $requette->bindParam(1, $_POST['email'], PDO::PARAM_STR);
                     $requette->bindParam(2, $_POST['password'], PDO::PARAM_STR);
                     $result = $requette->execute();
-                    if( $requette->fetch() != false ){
+                    $user = $requette->fetch();
+
+                    //if there is a matching user redirect to thanking page.
+                    if( $user != false ){
                         echo "<i style='color: #005cbf' class='fas fa-spinner fa-spin fa-pulse fa-2x'></i>";
+                        $_SESSION['user_id'] = $user['id'];
                         header("Location: /auth/thanks");
                     }
                     else{
@@ -39,6 +48,7 @@
                     $logger->log($e->getMessage());
                     echo "<i style='color: red' class='fas fa-times fa-2x'></i>";
                 }
+
             }
         }
         ?>
