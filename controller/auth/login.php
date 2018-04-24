@@ -27,11 +27,16 @@
 
                 try{
                     //Check the email and password submitted in the DB
-                    $requette = $bdd->prepare('SELECT id, email, password FROM user WHERE email=? AND password=?');
-                    $requette->bindParam(1, $_POST['email'], PDO::PARAM_STR);
-                    $requette->bindParam(2, $_POST['password'], PDO::PARAM_STR);
+                    $requette = $bdd->prepare('SELECT id, email, password FROM user WHERE email=:email AND password=:password');
+                    $requette->bindParam('email', $_POST['email'], PDO::PARAM_STR);
+                    $requette->bindParam('password', hash('sha256', $_POST['password']), PDO::PARAM_STR);
                     $result = $requette->execute();
                     $user = $requette->fetch();
+
+                    //update the last login dateTime
+                    $requette = $bdd->prepare('UPDATE user SET last_login=CURRENT_TIMESTAMP WHERE id=:id');
+                    $requette->bindParam('id', $user['id'], PDO::PARAM_INT);
+                    $requette->execute();
 
                     //if there is a matching user redirect to thanking page.
                     if( $user != false ){
