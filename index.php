@@ -12,7 +12,19 @@
 	require 'tools/logger.php';
 	require 'config/pdo.php';
 
+	//REQUIRING MODELS
+    require 'model/User.php';
+
 	$logger = new Logger();
+
+	//IF USER LOGGED, SAVE INFORMATIONS IN SESSION
+    $USER = NULL;
+    if ($_SESSION['user_id']){
+        $request = $bdd->prepare('SELECT email, firstname, lastname, last_login, updated_at  FROM user WHERE id=:id');
+        $request->bindParam('id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $request->execute();
+        $USER = $request->fetchObject('model\User');
+    }
 
     //ROUTE LOGIC
 	if(array_key_exists($requested_url, $routes_config))    // route config from routes.php

@@ -31,12 +31,12 @@
                     $request->bindParam('email', $_POST['email'], PDO::PARAM_STR);
                     $request->bindParam('password', hash('sha256', $_POST['password']), PDO::PARAM_STR);
                     $result = $request->execute();
-                    $user = $request->fetch();
+                    $currentUser = $request->fetch();
 
                     //if there is a matching user redirect to thanking page.
-                    if( $user != false ){
+                    if( $currentUser != false ){
 
-                        $userId = $user['id'];
+                        $userId = $currentUser['id'];
 
                         //update the last login dateTime
                         $request = $bdd->prepare('UPDATE user SET last_login=CURRENT_TIMESTAMP WHERE id=:id');
