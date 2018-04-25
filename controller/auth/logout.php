@@ -12,11 +12,8 @@
             else{
                 echo "user n° " . $_SESSION['user_id'];
             }
-
+            session_destroy();
             ?>.
         </h1>
     </div>
 </div>
-<?php
-session_destroy();
-?>

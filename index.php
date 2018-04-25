@@ -15,11 +15,12 @@
 	//REQUIRING MODELS
     require 'model/User.php';
 
+    //CREATING TOOLS REFERENCES
 	$logger = new Logger();
 
 	//IF USER LOGGED, SAVE INFORMATIONS IN SESSION
     $USER = NULL;
-    if ($_SESSION['user_id']){
+    if (isset($_SESSION['user_id'])){
         $request = $bdd->prepare('SELECT email, firstname, lastname, last_login, updated_at  FROM user WHERE id=:id');
         $request->bindParam('id', $_SESSION['user_id'], PDO::PARAM_INT);
         $request->execute();

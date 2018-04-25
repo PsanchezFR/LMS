@@ -24,11 +24,13 @@
                 try{
                     //icon
                     echo "<i style='color: #005cbf' class='fas fa-spinner fa-spin fa-pulse fa-2x'></i>";
+
                     //Request
                     $request = $bdd->prepare('INSERT INTO user (email, password) VALUES (:email, :password)');
                     $request->bindValue('email', $_POST['email']);
                     $request->bindValue('password', hash('sha256', $_POST['password']));
                     $request->execute();
+
                     //Redirect
                     header("Location: /auth/login");
                 }
