@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="/view/assets/css/mdl-override.css">
 <head>
     <body>
+
+<!-- LOG OUT BUTTON -->
+
 <?PHP
 if (isset($USER)){
         echo "<a href='/auth/logout' class='mdl-chip position-absolute m-2' style='color: silver; background-color: #4159c1; right: 0px' '>";

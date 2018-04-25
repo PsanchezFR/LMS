@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start();    // only logout button can log you out.
 
     //CATCH THE URL REQUESTED
 	$requested_url = $_SERVER['PATH_INFO'];
@@ -26,7 +26,8 @@
         $USER = $request->fetchObject('model\User');
     }
 
-    //ROUTE LOGIC
+    //ROUTE LOGIC - test url, routes and files.
+    // if incorrect log an error with $logger (cf. tools/logger)
 	if(array_key_exists($requested_url, $routes_config))    // route config from routes.php
 	{
 		$logger -> log("route found : ${requested_url}");
